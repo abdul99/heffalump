@@ -1,4 +1,4 @@
 heffalump
 =========
 
-Heffalump - a repository of Hadoop useful programs for training and reference
+Heffalump - A collection of Hadoop programs for training and reference
