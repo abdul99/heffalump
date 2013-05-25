@@ -1,1 +1,0 @@
-WORKDIR=$HOME/Developer/olefant

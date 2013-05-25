@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>agilesoft</groupId>
+    <groupId>hadooptraining</groupId>
     <artifactId>heffalump</artifactId>
     <version>1.0</version>
     <name>heffalump</name>
@@ -35,7 +35,7 @@
                     <executable>java</executable>
                     <arguments>
                         <argument>-classpath</argument><classpath />
-                        <argument>com.agilesoft.recommender.RecommenderIntro</argument>
+                        <argument>com.hadooptraining.recommender.RecommenderIntro</argument>
                         <argument>data/intro.csv</argument>
                     </arguments>
                 </configuration>

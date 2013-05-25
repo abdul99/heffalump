@@ -16,7 +16,8 @@ import org.apache.hadoop.util.ToolRunner;
 public class WordCountWithTools extends Configured implements Tool {
     public int run(String[] args) throws Exception {
         if (args.length < 2) {
-            System.out.println("Usage: WordCountWithTools WordCount<inDir><outDir>");
+            System.out.println("Usage: WordCountWithTools <inDir> <outDir>");
+            System.out.println("Example: WordCountWithTools input output");
             ToolRunner.printGenericCommandUsage(System.out);
             System.out.println("");
             return -1;

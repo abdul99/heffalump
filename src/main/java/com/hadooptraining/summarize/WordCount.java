@@ -3,7 +3,6 @@ package com.hadooptraining.summarize;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -65,15 +64,7 @@ public class WordCount {
     }
 
     /**
-     * <p> As input this program takes any text file. Create a folder called input in HDFS (or in local directory if you are running this locally)
-     * <ol>
-     * <li>Option1: You can compile the sample by ant from sample directory.  To do this, you need to have Apache Ant installed in your system.
-     * Otherwise, you can use the complied jar included with the source code. Change directory to HADOOP_HOME, and copy the hadoop-cookbook.jar to the HADOOP_HOME.
-     * Then run the command > bin/hadoop jar hadoop-cookbook.jar chapter1.WordCount input output.</li>
-     * <li>As an optional step, copy the "input" directory to the top level of the IDE based project (eclipse project) that you created for samples. Now you can run
-     * the WordCount class directly from your IDE passing "input output" as arguments. This will run the sample same as before. Running MapReduce Jobs from IDE in this manner is very useful
-     * for debugging your MapReduce Jobs. </li>
-     * </ol>
+     * <p> As input this program takes any text file. Create a folder called input in HDFS (or in local directory if you are running this locally)</p>
      * @param args
      * @throws Exception
      */
@@ -81,7 +72,8 @@ public class WordCount {
         JobConf conf = new JobConf();
         String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
         if (otherArgs.length != 2) {
-            System.err.println("Usage: wordcount <in> <out>");
+            System.out.println("Usage: wordcount <input_hdfs_dir> <output_hdfs_dir>");
+            System.out.println("Example: wordcount input output");
             System.exit(2);
         }
 
