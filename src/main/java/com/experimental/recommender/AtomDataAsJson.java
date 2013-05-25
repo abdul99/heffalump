@@ -1,4 +1,4 @@
-package com.hadooptraining.recommender;
+package com.experimental.recommender;
 
 import java.io.BufferedReader;
 import java.io.IOException;

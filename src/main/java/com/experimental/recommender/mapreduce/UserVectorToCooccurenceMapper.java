@@ -1,4 +1,4 @@
-package com.hadooptraining.recommender.mapreduce;
+package com.experimental.recommender.mapreduce;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Mapper;

@@ -1,4 +1,4 @@
-package com.hadooptraining.recommender.mapreduce;
+package com.experimental.recommender.mapreduce;
 
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.log4j.Logger;

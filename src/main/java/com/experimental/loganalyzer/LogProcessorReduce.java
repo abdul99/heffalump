@@ -1,4 +1,4 @@
-package com.hadooptraining.loganalyzer;
+package com.experimental.loganalyzer;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;

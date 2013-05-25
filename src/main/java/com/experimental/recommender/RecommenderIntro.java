@@ -1,4 +1,4 @@
-package com.hadooptraining.recommender;
+package com.experimental.recommender;
 
 import org.apache.mahout.cf.taste.impl.model.file.*;
 import org.apache.mahout.cf.taste.impl.neighborhood.*;

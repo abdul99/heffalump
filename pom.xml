@@ -35,7 +35,7 @@
                     <executable>java</executable>
                     <arguments>
                         <argument>-classpath</argument><classpath />
-                        <argument>com.hadooptraining.recommender.RecommenderIntro</argument>
+                        <argument>com.experimental.recommender.RecommenderIntro</argument>
                         <argument>data/intro.csv</argument>
                     </arguments>
                 </configuration>

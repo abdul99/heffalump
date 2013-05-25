@@ -5,8 +5,6 @@ import java.util.Collection;
 
 import junit.framework.TestCase;
 
-import com.hadooptraining.recommender.AtomDataAsJson;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

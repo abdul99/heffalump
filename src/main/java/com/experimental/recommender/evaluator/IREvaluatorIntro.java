@@ -1,4 +1,4 @@
-package com.hadooptraining.recommender.evaluator;
+package com.experimental.recommender.evaluator;
 
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.eval.IRStatistics;

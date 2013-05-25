@@ -1,4 +1,4 @@
-package com.hadooptraining.loganalyzer.genericwritable;
+package com.experimental.loganalyzer.genericwritable;
 
 import org.apache.hadoop.io.GenericWritable;
 import org.apache.hadoop.io.IntWritable;
