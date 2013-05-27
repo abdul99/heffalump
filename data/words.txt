@@ -1,2 +1,0 @@
-Hello Hadoop. This is a Hadoop test file for WordCount.
-Thank You.
