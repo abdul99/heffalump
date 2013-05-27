@@ -1,4 +1,4 @@
-CLASSNAME=com.experimental.cascading.WordCountCascading
+CLASSNAME=com.hadooptraining.extra.cascading.WordCountCascading
 
 export HADOOP_CLASSPATH=/usr/lib/cascading/*:/usr/lib/cascading/lib/*
 # export HADOOP_USER_CLASSPATH_FIRST=true

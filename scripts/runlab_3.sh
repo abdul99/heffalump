@@ -1,4 +1,4 @@
-CLASSNAME=com.hadooptraining.hdfs.FileCopy
+CLASSNAME=com.hadooptraining.lab3.FileCopy
 
 echo Cleaning old output directory...
 hadoop fs -rm -r /user/shrek/output

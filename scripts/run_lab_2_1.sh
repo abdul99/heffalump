@@ -1,4 +1,4 @@
-CLASSNAME=com.hadooptraining.summarize.WordCount
+CLASSNAME=com.hadooptraining.lab6.WordCount
 
 echo Deleting old output directory...
 hadoop fs -rm -r /user/shrek/output
