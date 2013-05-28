@@ -1,4 +1,4 @@
-package com.hadooptraining.lab7;
+package com.hadooptraining.lab8;
 
 import java.io.IOException;
 

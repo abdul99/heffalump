@@ -6,10 +6,10 @@ hadoop fs -rm -r input
 hadoop fs -mkdir input
 echo
 echo Copying input files to HDFS...
-hadoop fs -copyFromLocal -f data/access.log input
+hadoop fs -copyFromLocal -f data/NASA_access_log.txt input
 echo
 echo Running Hadoop task...
-command="hadoop jar $DEV_HOME/target/heffalump-1.0.jar $CLASSNAME input output 2"
+command="hadoop jar $DEV_HOME/target/heffalump-1.0.jar $CLASSNAME input output"
 echo $command
 $command
 echo ...Done
@@ -19,5 +19,4 @@ hadoop fs -ls output
 echo The results are in two files since we specified two reducers.
 echo To see your results type:
 echo hadoop fs -cat output/part-r-00000
-echo hadoop fs -cat output/part-r-00001
 echo
