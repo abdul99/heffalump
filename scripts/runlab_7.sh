@@ -14,9 +14,8 @@ echo $command
 $command
 echo ...Done
 echo
-echo Here is the files created in the output directory...
+echo Here are the files created in the output directory...
 hadoop fs -ls output
-echo The results are in two files since we specified two reducers.
-echo To see your results type:
+echo To see your result type:
 echo hadoop fs -cat output/part-r-00000
 echo
