@@ -69,12 +69,13 @@ public class StockPriceAnalyzer extends Configured implements Tool {
     public static class StockReducer
             extends Reducer<Text, FloatWritable, Text, FloatWritable> {
 
-        public void reduce(Text key, Iterator<FloatWritable> values, Context context)
+        public void reduce(Text key, Iterable<FloatWritable> values, Context context)
                 throws IOException, InterruptedException {
             float max = 0.0f; // assume prices are never negative
-            while (values.hasNext()) {
-                float current = values.next().get();
-                if (max < current) max = current;
+            for (FloatWritable price : values) {
+                float current = price.get();
+                if (max < current)
+                    max = current;
             }
             context.write(key, new FloatWritable(max));
         }
