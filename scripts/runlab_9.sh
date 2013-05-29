@@ -5,8 +5,9 @@ hadoop fs -rm -r output
 hadoop fs -rm -r input
 hadoop fs -mkdir input
 echo
-echo Copying input files to HDFS...
+echo Unzipping files to local drive first...
 tar -xzvf data/NYSEStockData.tar.gz
+echo Copying input files to HDFS... may take long.
 hadoop fs -copyFromLocal -f nyse/* input
 rm -rf nyse
 hadoop fs -ls input

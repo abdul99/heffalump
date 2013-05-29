@@ -1,4 +1,4 @@
-package com.hadooptraining.lab8;
+package com.hadooptraining.lab10;
 
 import java.util.StringTokenizer;
 

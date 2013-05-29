@@ -1,5 +1,8 @@
-package com.hadooptraining.lab8;
+package com.hadooptraining.lab10;
 
+import com.hadooptraining.lab8.LogFileInputFormat;
+import com.hadooptraining.lab8.LogProcessorMap;
+import com.hadooptraining.lab8.LogProcessorReduce;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -11,7 +14,8 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-public class LogProcessor extends Configured implements Tool {
+
+public class LogProcessorWithPartitioner extends Configured implements Tool {
 
     @Override
     public int run(String[] args) throws Exception {
@@ -29,7 +33,7 @@ public class LogProcessor extends Configured implements Tool {
 
         //DistributedCache.addCacheArchive(new URI("/user/thilina/ip2locationdb.tar.gz#ip2locationdb"), job.getConfiguration());
 
-        job.setJarByClass(LogProcessor.class);
+        job.setJarByClass(LogProcessorWithPartitioner.class);
 
         job.setMapperClass(LogProcessorMap.class);
         job.setReducerClass(LogProcessorReduce.class);
@@ -39,7 +43,7 @@ public class LogProcessor extends Configured implements Tool {
 
         job.setInputFormatClass(LogFileInputFormat.class);
 
-        // job.setPartitionerClass(IPBasedPartitioner.class);
+        job.setPartitionerClass(IPBasedPartitioner.class);
 
         FileInputFormat.setInputPaths(job, new Path(inputPath));
         FileOutputFormat.setOutputPath(job, new Path(outputPath));
@@ -51,7 +55,7 @@ public class LogProcessor extends Configured implements Tool {
     }
 
     public static void main(String[] args) throws Exception {
-        int res = ToolRunner.run(new Configuration(), new LogProcessor(), args);
+        int res = ToolRunner.run(new Configuration(), new LogProcessorWithPartitioner(), args);
         System.exit(res);
     }
 
