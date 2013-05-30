@@ -197,6 +197,11 @@
             <version>1.0</version>
         </dependency>
         <dependency>
+            <groupId>com.maxmind</groupId>
+            <artifactId>geoip-api</artifactId>
+            <version>1.2.11</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
