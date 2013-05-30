@@ -7,7 +7,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 public class LogProcessorReduce extends
-        Reducer<Text,IntWritable,Text,IntWritable> {
+        Reducer<Text, IntWritable, Text, IntWritable> {
     private IntWritable result = new IntWritable();
 
     public void reduce(Text key, Iterable<IntWritable> values, Context context)

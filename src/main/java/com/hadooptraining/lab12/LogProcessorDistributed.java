@@ -52,7 +52,7 @@ public class LogProcessorDistributed extends Configured implements Tool {
         FileOutputFormat.setOutputPath(job, new Path(outputPath));
 
         job.setNumReduceTasks(numReduce);
-        job.setOutputFormatClass(SequenceFileOutputFormat.class);
+        // job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
         return job.waitForCompletion(true) ? 0 : 1;
     }

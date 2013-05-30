@@ -49,7 +49,7 @@ public class LogFileRecordReader  extends RecordReader<LongWritable, LogWritable
         int bytes = Integer.parseInt(matcher.group(7));
 
         value = new LogWritable();
-        value.set(userIP, timestamp, request, status, bytes);
+        value.set(userIP, timestamp, request, bytes, status);
         return true;
     }
 

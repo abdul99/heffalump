@@ -34,7 +34,6 @@ public class LogProcessorMapDistributed extends Mapper<Object, LogWritable, Text
             throws IOException, InterruptedException {
 
         Country country = lookupService.getCountry(value.getUserIP().toString());
-System.out.println(country.getName() + "  = >" + value.getResponseSize());
-        context.write(new Text(country.getName()),value.getResponseSize());
+        context.write(new Text(country.getName()), value.getResponseSize());
     }
 }
