@@ -31,9 +31,9 @@ public class PitchingDataProcessor extends Configured implements Tool {
 
             // Format: playerID,yearID,stint,teamID,lgID,W,L,G,GS,CG,SHO,SV,IPouts,H,ER,HR,BB,SO,BAOpp,ERA,IBB,WP,HBP,BK,BFP,GF,R,SH,SF,GIDP
             // Example: aardsda01,2010,1,SEA,AL,0,6,53,0,0,0,31,149,33,19,5,25,49,,3.44,5,2,2,0,202,43,19,,,
-            String logEntryPattern = "^(\\S+),(\\d{4}),(\\d+),(\\S+),(\\S+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+).(\\d+),(?:[1-9]\\d*|0)?(?:\\.\\d+)?,(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d*),(\\d*),(\\d*)";
+            String entryPattern = "^(\\S+),(\\d{4}),(\\d+),(\\S+),(\\S+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+).(\\d+),(?:[1-9]\\d*|0)?(?:\\.\\d+)?,(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d*),(\\d*),(\\d*)";
 
-            Pattern p = Pattern.compile(logEntryPattern);
+            Pattern p = Pattern.compile(entryPattern);
             Matcher matcher = p.matcher(value.toString());
             if (!matcher.matches()) {
                 System.err.println("Bad record: " + value.toString());
@@ -64,7 +64,7 @@ public class PitchingDataProcessor extends Configured implements Tool {
             String[] pitchingValues = value.toString().split(",");
 
             pitchingValue.set(pitchingValues[0], pitchingValues[1], Integer.parseInt(pitchingValues[26]));
-            System.out.println("ID:" + pitchingValue.getPlayerID().toString() + " Year:" + pitchingValue.getYear() + " Runs: " + pitchingValue.getRunsAllowed());
+            System.out.println("ID:" + pitchingValue.getPlayerID().toString() + " Year:" + pitchingValue.getYear() + " Runs: " + pitchingValue.getRuns());
             playerIDText.set(pitchingValues[0]);
 
             context.write(playerIDText, pitchingValue);

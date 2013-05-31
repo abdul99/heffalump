@@ -60,35 +60,35 @@ public class PitchingWritable implements Writable {
 /*
       PITCHING TABLE
       ==============
-0     playerID       Player ID code
-1     yearID         Year
-2     stint          player's stint (order of appearances within a season)
-3     teamID         Team
-4     lgID           League
-5     W              Wins
-6     L              Losses
-7     G              Games
-8     GS             Games Started
-9     CG             Complete Games
-10    SHO            Shutouts
-11    SV             Saves
-12    IPOuts         Outs Pitched (innings pitched x 3)
-13    H              Hits
-14    ER             Earned Runs
-15    HR             Homeruns
-16    BB             Walks
-17    SO             Strikeouts
-18    BAOpp          Opponent's Batting Average
-19    ERA            Earned Run Average
-20    IBB            Intentional Walks
-21    WP             Wild Pitches
-22    HBP            Batters Hit By Pitch
-23    BK             Balks
-24    BFP            Batters faced by Pitcher
-25    GF             Games Finished
-26    R              Runs Allowed
-27    SH             Sacrifices by opposing batters
-28    SF             Sacrifice flies by opposing batters
-29    GIDP           Grounded into double plays by opposing batter
+1     playerID       Player ID code
+2     yearID         Year
+3     stint          player's stint (order of appearances within a season)
+4     teamID         Team
+5     lgID           League
+6     W              Wins
+7     L              Losses
+8     G              Games
+9     GS             Games Started
+10     CG             Complete Games
+11    SHO            Shutouts
+12    SV             Saves
+13    IPOuts         Outs Pitched (innings pitched x 3)
+14    H              Hits
+15    ER             Earned Runs
+16    HR             Homeruns
+17    BB             Walks
+18    SO             Strikeouts
+19    BAOpp          Opponent's Batting Average
+20    ERA            Earned Run Average
+21    IBB            Intentional Walks
+22    WP             Wild Pitches
+23    HBP            Batters Hit By Pitch
+24    BK             Balks
+25    BFP            Batters faced by Pitcher
+26    GF             Games Finished
+27    R              Runs Allowed
+28    SH             Sacrifices by opposing batters
+29    SF             Sacrifice flies by opposing batters
+30    GIDP           Grounded into double plays by opposing batter
 
 */
