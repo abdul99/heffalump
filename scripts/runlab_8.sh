@@ -1,4 +1,4 @@
-CLASSNAME=com.hadooptraining.lab8.LogProcessor
+CLASSNAME=com.hadooptraining.lab8.LogProcessorWithCustomInputFormat
 
 echo Cleaning input and output directories...
 hadoop fs -rm -r output

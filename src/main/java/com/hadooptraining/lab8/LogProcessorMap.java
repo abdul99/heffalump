@@ -11,6 +11,6 @@ public class LogProcessorMap extends Mapper<Object, LogWritable, Text, IntWritab
     public void map(Object key, LogWritable value, Context context)
             throws IOException, InterruptedException {
 
-        context.write(value.getUserIP(),value.getResponseSize());  // make bytes longWritable and output two value types
+        context.write(value.getUserIP(),value.getResponseSize());
     }
 }

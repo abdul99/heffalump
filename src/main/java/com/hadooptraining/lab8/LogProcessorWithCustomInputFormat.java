@@ -11,7 +11,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-public class LogProcessor extends Configured implements Tool {
+public class LogProcessorWithCustomInputFormat extends Configured implements Tool {
 
     @Override
     public int run(String[] args) throws Exception {
@@ -27,9 +27,7 @@ public class LogProcessor extends Configured implements Tool {
 
         Job job = new Job(getConf(), "log-analysis");
 
-        //DistributedCache.addCacheArchive(new URI("/user/thilina/ip2locationdb.tar.gz#ip2locationdb"), job.getConfiguration());
-
-        job.setJarByClass(LogProcessor.class);
+        job.setJarByClass(LogProcessorWithCustomInputFormat.class);
 
         job.setMapperClass(LogProcessorMap.class);
         job.setReducerClass(LogProcessorReduce.class);
@@ -39,19 +37,16 @@ public class LogProcessor extends Configured implements Tool {
 
         job.setInputFormatClass(LogFileInputFormat.class);
 
-        // job.setPartitionerClass(IPBasedPartitioner.class);
-
         FileInputFormat.setInputPaths(job, new Path(inputPath));
         FileOutputFormat.setOutputPath(job, new Path(outputPath));
 
         job.setNumReduceTasks(numReduce);
-        //job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
         return job.waitForCompletion(true) ? 0 : 1;
     }
 
     public static void main(String[] args) throws Exception {
-        int res = ToolRunner.run(new Configuration(), new LogProcessor(), args);
+        int res = ToolRunner.run(new Configuration(), new LogProcessorWithCustomInputFormat(), args);
         System.exit(res);
     }
 

@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LogProcessor extends Configured implements Tool {
+public class LogProcessorWithCustomWritable extends Configured implements Tool {
 
     public static class LogProcessorMap extends
             Mapper<LongWritable, Text, Text, LogWritable> {
@@ -75,7 +75,7 @@ public class LogProcessor extends Configured implements Tool {
 
         Job job = new Job(getConf(), "log-analysis");
 
-        job.setJarByClass(LogProcessor.class);
+        job.setJarByClass(LogProcessorWithCustomWritable.class);
 
         job.setMapperClass(LogProcessorMap.class);
         job.setReducerClass(LogProcessorReduce.class);
@@ -93,7 +93,7 @@ public class LogProcessor extends Configured implements Tool {
     }
 
     public static void main(String[] args) throws Exception {
-        int res = ToolRunner.run(new Configuration(), new LogProcessor(), args);
+        int res = ToolRunner.run(new Configuration(), new LogProcessorWithCustomWritable(), args);
         System.exit(res);
     }
 

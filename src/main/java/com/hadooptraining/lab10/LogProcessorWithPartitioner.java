@@ -31,8 +31,6 @@ public class LogProcessorWithPartitioner extends Configured implements Tool {
 
         Job job = new Job(getConf(), "log-analysis");
 
-        //DistributedCache.addCacheArchive(new URI("/user/thilina/ip2locationdb.tar.gz#ip2locationdb"), job.getConfiguration());
-
         job.setJarByClass(LogProcessorWithPartitioner.class);
 
         job.setMapperClass(LogProcessorMap.class);
@@ -43,13 +41,12 @@ public class LogProcessorWithPartitioner extends Configured implements Tool {
 
         job.setInputFormatClass(LogFileInputFormat.class);
 
-        job.setPartitionerClass(IPBasedPartitioner.class);
+        job.setPartitionerClass(IPBasedPartitioner.class);  // This is the line where Partitioner is configured
 
         FileInputFormat.setInputPaths(job, new Path(inputPath));
         FileOutputFormat.setOutputPath(job, new Path(outputPath));
 
         job.setNumReduceTasks(numReduce);
-        //job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
         return job.waitForCompletion(true) ? 0 : 1;
     }
