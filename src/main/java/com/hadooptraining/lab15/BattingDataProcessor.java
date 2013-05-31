@@ -31,7 +31,7 @@ public class BattingDataProcessor extends Configured implements Tool {
 
             // Format: playerID,yearID,stint,teamID,lgID,G,G_batting,AB,R,H,2B,3B,HR,RBI,SB,CS,BB,SO,IBB,HBP,SH,SF,GIDP,G_old
             // Example: aaronha01,1955,1,ML1,NL,153,153,602,105,189,37,9,27,106,3,1,49,61,5,3,7,4,20,153
-            String entryPattern = "^(\\S+),(\\d{4}),(\\d+),(\\S+),(\\S+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+),(\\d+)";
+            String entryPattern = "^(\\S+),(\\d{4}),(\\d+),(\\S+),(\\S+),(\\d+),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*)";
 
             Pattern p = Pattern.compile(entryPattern);
             Matcher matcher = p.matcher(value.toString());
@@ -39,6 +39,9 @@ public class BattingDataProcessor extends Configured implements Tool {
                 System.err.println("Bad record: " + value.toString());
                 return;
             }
+
+            if ((matcher.group(9) == null ) || matcher.group(9).isEmpty())
+                return;
 
             battingValue.set(matcher.group(1), matcher.group(2), Integer.parseInt(matcher.group(9)));
             playerIDText.set(matcher.group(1));
