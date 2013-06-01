@@ -15,8 +15,6 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class PitchingDataProcessor extends Configured implements Tool {
 
@@ -31,49 +29,23 @@ public class PitchingDataProcessor extends Configured implements Tool {
 
             // Format: playerID,yearID,stint,teamID,lgID,W,L,G,GS,CG,SHO,SV,IPouts,H,ER,HR,BB,SO,BAOpp,ERA,IBB,WP,HBP,BK,BFP,GF,R,SH,SF,GIDP
             // Example: aardsda01,2010,1,SEA,AL,0,6,53,0,0,0,31,149,33,19,5,25,49,,3.44,5,2,2,0,202,43,19,,,
-            String entryPattern = "^(\\S+),(\\d{4}),(\\d+),(\\S+),(\\S+),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(?:[1-9]\\d*|0)?(?:\\.\\d+)?,(?:[1-9]\\d*|0)?(?:\\.\\d+)?,(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*),(\\d*)";
 
-            Pattern p = Pattern.compile(entryPattern);
-            Matcher matcher = p.matcher(value.toString());
-            if (!matcher.matches()) {
-                System.err.println("Bad record: " + value.toString());
+            String[] fields = value.toString().split(",");
+
+            if ("playerID".equalsIgnoreCase(fields[0])) {
+                // This simple check eliminates the very first record
                 return;
             }
 
-            if ((matcher.group(27) == null ) || matcher.group(27).isEmpty())
+            if ((fields[26] == null) || (fields[26].isEmpty()))
                 return;
 
-            pitchingValue.set(matcher.group(1), matcher.group(2), Integer.parseInt(matcher.group(27)));
-            playerIDText.set(matcher.group(1));
+            pitchingValue.set(fields[0], fields[1], Integer.parseInt(fields[26]));
+            playerIDText.set(fields[0]);
 
             context.write(playerIDText, pitchingValue);
         }
     }
-
-    /*
-    An alternate and simpler way to parse each of line of Pitching.csv file
-
-    public static class PitchingDataProcessorMap extends
-            Mapper<LongWritable, Text, Text, PitchingWritable> {
-
-        private Text playerIDText = new Text();
-        private PitchingWritable pitchingValue = new PitchingWritable();
-
-        public void map(Text key, PitchingWritable value, Context context)
-                throws IOException, InterruptedException {
-
-            // Format of each line is as follows:
-            // playerID,yearID,stint,teamID,lgID,W,L,G,GS,CG,SHO,SV,IPouts,H,ER,HR,BB,SO,BAOpp,ERA,IBB,WP,HBP,BK,BFP,GF,R,SH,SF,GIDP
-            String[] pitchingValues = value.toString().split(",");
-
-            pitchingValue.set(pitchingValues[0], pitchingValues[1], Integer.parseInt(pitchingValues[26]));
-            System.out.println("ID:" + pitchingValue.getPlayerID().toString() + " Year:" + pitchingValue.getYear() + " Runs: " + pitchingValue.getRuns());
-            playerIDText.set(pitchingValues[0]);
-
-            context.write(playerIDText, pitchingValue);
-        }
-    }
-    */
 
     public static class PitchingDataProcessorReduce extends
             Reducer<Text, PitchingWritable, Text, IntWritable> {
@@ -127,4 +99,3 @@ public class PitchingDataProcessor extends Configured implements Tool {
     }
 
 }
-
