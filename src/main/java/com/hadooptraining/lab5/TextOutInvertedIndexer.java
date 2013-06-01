@@ -61,8 +61,8 @@ public class TextOutInvertedIndexer {
        /**
         * This is the mapper for the inverted index. Note that the key and value are
         * the same ones expressed in K2 and V2 in the template above.
-        * @param key output key for the mapper
-        * @param value output value for the mapper
+        * @param key input key for the mapper
+        * @param value input value for the mapper
         * @param context the context object that stores the configuration and handles the writes
         * @throws IOException
         * @throws InterruptedException
@@ -94,8 +94,8 @@ public class TextOutInvertedIndexer {
          * The reduce function takes the document id as key, and frequency of the document as value.
          * It outputs the term and a list of document ids and the number of occurance of the term
          * in that document. The signature of the the reduce function is <K3, V3>
-         * @param key the output key for the reducer
-         * @param values the output value for the reducer
+         * @param key the input key for the reducer
+         * @param values the input value for the reducer
          * @param context a context object to write to
          * @throws IOException
          * @throws InterruptedException
@@ -136,8 +136,8 @@ public class TextOutInvertedIndexer {
         /**
          * Note that the signature of the combiner is the same as the reduce function. It uses
          * <K3, V3> as its key-value pairs.
-         * @param key the combiner output key
-         * @param values the combiner output value
+         * @param key the combiner input key
+         * @param values the combiner input value
          * @param context the context object to write to
          * @throws IOException
          * @throws InterruptedException
