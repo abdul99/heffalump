@@ -8,6 +8,10 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 
+/**
+ * This class represents the output record. In this class, we output a record containing the document ID along with
+ * the number of times a certain word appears in that document.
+ */
 public class TermFrequencyWritable implements Writable {
 
     private Text documentID;
