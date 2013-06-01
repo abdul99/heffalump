@@ -7,6 +7,7 @@ hadoop fs -mkdir input
 echo
 echo Copying input files to HDFS...
 hadoop fs -copyFromLocal -f data/NASA_access_log.txt input
+hadoop fs -ls input
 echo
 echo Running Hadoop task...
 command="hadoop jar $DEV_HOME/target/heffalump-1.0.jar $CLASSNAME input output"
@@ -16,6 +17,7 @@ echo ...Done
 echo
 echo Here are the files created in the output directory...
 hadoop fs -ls output
-echo To see your result type:
+echo
+echo To see your result, type:
 echo hadoop fs -cat output/part-r-00000
 echo

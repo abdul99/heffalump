@@ -3,17 +3,24 @@ CLASSNAME=com.hadooptraining.extra.cascading.WordCountCascading
 export HADOOP_CLASSPATH=/usr/lib/cascading/*:/usr/lib/cascading/lib/*
 # export HADOOP_USER_CLASSPATH_FIRST=true
 
-echo Cleaning old output directory...
-hadoop fs -rm -r /user/shrek/output
+echo Cleaning input and output directories...
+hadoop fs -rm -r output
+hadoop fs -rm -r input
+hadoop fs -mkdir input
 echo
-echo Copying data file to input folder
-hadoop fs -copyFromLocal -f data/rain.txt input/rain.txt 
+echo Copying input files to HDFS...
+hadoop fs -copyFromLocal -f data/rain.txt input
+hadoop fs -ls input
+echo
 echo Running Hadoop task...
-command="hadoop jar $DEV_HOME/target/heffalump-1.0.jar $CLASSNAME input/rain.txt output"
+command="hadoop jar $DEV_HOME/target/heffalump-1.0.jar $CLASSNAME input output"
 echo $command
 $command
 echo ...Done
 echo
-echo Here is the output from HDFS...
-hadoop fs -cat output
+echo Here are the files created in the output directory...
+hadoop fs -ls output
+echo
+echo To see your result type:
+echo hadoop fs -cat output/part-r-00000
 echo

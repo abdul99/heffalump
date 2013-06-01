@@ -1,4 +1,5 @@
 echo Cleaning input and output directories...
+cd $DEV_HOME/scripts
 hadoop fs -rm -r output
 hadoop fs -rm -r input
 hadoop fs -mkdir input
@@ -17,6 +18,7 @@ echo ...Done
 echo
 echo Here are the files created in the output directory...
 hadoop fs -ls output
-echo To see your result type:
+echo
+echo To see your result, type:
 echo hadoop fs -cat output/part-00000
 echo

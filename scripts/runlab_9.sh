@@ -20,6 +20,6 @@ echo ...Done
 echo
 echo Here are the files created in the output directory...
 hadoop fs -ls output
-echo To see your result type:
+echo To see your result, type:
 echo hadoop fs -cat output/part-r-00000
 echo

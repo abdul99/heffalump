@@ -1,4 +1,4 @@
-CLASSNAME=com.hadooptraining.lab15.BattingDataProcessor
+CLASSNAME=com.hadooptraining.lab6.WordCount
 
 echo Cleaning input and output directories...
 hadoop fs -rm -r output
@@ -6,7 +6,7 @@ hadoop fs -rm -r input
 hadoop fs -mkdir input
 echo
 echo Copying input files to HDFS...
-hadoop fs -copyFromLocal -f data/baseballstats/Batting.csv input
+hadoop fs -copyFromLocal -f data/sample1.txt input
 hadoop fs -ls input
 echo
 echo Running Hadoop task...
@@ -15,9 +15,9 @@ echo $command
 $command
 echo ...Done
 echo
-echo Here are the files created in the output directory...
+echo Here are the files produced in output folder...
 hadoop fs -ls output
 echo
-echo To see your result type:
+echo To see your result, type:
 echo hadoop fs -cat output/part-r-00000
 echo

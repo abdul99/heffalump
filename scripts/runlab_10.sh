@@ -17,8 +17,9 @@ echo ...Done
 echo
 echo Here are the files created in the output directory...
 hadoop fs -ls output
+echo
 echo The results are in ten files since we specified ten reducers and thus 10 partitioners.
-echo To see your results type:
+echo To see your results, type:
 echo hadoop fs -cat output/part-r-00000
 echo hadoop fs -cat output/part-r-00001
 echo ...etc. 
