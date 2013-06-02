@@ -182,7 +182,7 @@ public class TextOutInvertedIndexer {
         }
 
         // Your job is handled by the Job object - managed by the JobTracker
-        Job job = new Job(conf, "TextOut Inverted Indexer");
+        Job job = Job.getInstance(conf, "TextOut Inverted Indexer");
 
         // This is class that is used to find the jar file that needs to be run
         job.setJarByClass(TextOutInvertedIndexer.class);

@@ -18,7 +18,7 @@
             </activation>
             <properties>
                 <log4j.version>1.2.16</log4j.version>
-                <hadoop.version>0.20.2-cdh3u2</hadoop.version>
+                <hadoop.version>2.0.0-cdh4.3.0</hadoop.version>
                 <jackson.version>1.6.3</jackson.version>
                 <jdk.level>1.6</jdk.level>
             </properties>
@@ -125,13 +125,12 @@
             <scope>test</scope>
         </dependency>
 
-        <!--
         <dependency>
             <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-core</artifactId>
+            <artifactId>hadoop-client</artifactId>
             <version>${hadoop.version}</version>
         </dependency>
-        
+        <!--
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -223,6 +222,11 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
+        </repository>
+        <repository>
+            <id>maven-hadoop</id>
+            <name>Hadoop Releases</name>
+            <url>https://repository.cloudera.com/content/repositories/releases/</url>
         </repository>
         <repository>
             <snapshots>

@@ -79,7 +79,7 @@ public class LogProcessorWithDebug extends Configured implements Tool {
         String inputPath = args[0];
         String outputPath = args[1];
 
-        Job job = new Job(getConf(), "log-analysis");
+        Job job = Job.getInstance(getConf(), "log-analysis");
 
         job.setJarByClass(LogProcessorWithDebug.class);
 

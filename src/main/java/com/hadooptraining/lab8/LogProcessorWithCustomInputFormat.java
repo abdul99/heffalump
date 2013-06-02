@@ -25,7 +25,7 @@ public class LogProcessorWithCustomInputFormat extends Configured implements Too
         String outputPath = args[1];
         int numReduce = Integer.parseInt(args[2]);
 
-        Job job = new Job(getConf(), "log-analysis");
+        Job job = Job.getInstance(getConf(), "log-analysis");
 
         job.setJarByClass(LogProcessorWithCustomInputFormat.class);
 

@@ -36,7 +36,7 @@ public class WordCountWithTools extends Configured implements Tool {
             return -1;
         }
 
-        Job job = new Job(getConf(), "Word count with tools");
+        Job job = Job.getInstance(getConf(), "Word count with tools");
 
         job.setJarByClass(WordCount.class);
 

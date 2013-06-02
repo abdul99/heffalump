@@ -91,7 +91,7 @@ public class StockPriceAnalyzer extends Configured implements Tool {
         String inputPath = args[0];
         String outputPath = args[1];
 
-        Job job = new Job(getConf(), "stock-analysis");
+        Job job = Job.getInstance(getConf(), "stock-analysis");
 
         job.setJarByClass(StockPriceAnalyzer.class);
 

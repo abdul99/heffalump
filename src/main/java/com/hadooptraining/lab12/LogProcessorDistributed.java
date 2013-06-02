@@ -32,7 +32,7 @@ public class LogProcessorDistributed extends Configured implements Tool {
         String outputPath = args[1];
         int numReduce = Integer.parseInt(args[2]);
 
-        Job job = new Job(getConf(), "log-analysis");
+        Job job = Job.getInstance(getConf(), "log-analysis");
 
         DistributedCache.addCacheFile(new URI("/user/shrek/GeoIP.dat"), job.getConfiguration());
 
