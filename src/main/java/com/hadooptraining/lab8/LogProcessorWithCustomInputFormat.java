@@ -5,6 +5,8 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Counter;
+import org.apache.hadoop.mapreduce.Counters;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -42,12 +44,17 @@ public class LogProcessorWithCustomInputFormat extends Configured implements Too
 
         job.setNumReduceTasks(numReduce);
 
-        return job.waitForCompletion(true) ? 0 : 1;
+        boolean jobResult = job.waitForCompletion(true);
+
+        Counters counters = job.getCounters();
+        Counter badRecords = counters.findCounter(LogProcessorMap.LOG_PROCESSOR_COUNTER.BAD_RECORDS);
+        System.out.println("Number of Bad Records: " + badRecords.getValue());
+
+        return jobResult ? 0 : 1;
     }
 
     public static void main(String[] args) throws Exception {
         int res = ToolRunner.run(new Configuration(), new LogProcessorWithCustomInputFormat(), args);
         System.exit(res);
     }
-
 }
