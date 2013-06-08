@@ -39,7 +39,9 @@ public class HBaseClient {
                 KeyValue[] keyValuePairs = result.raw();
                 System.out.println(new String(result.getRow()));
                 for(KeyValue keyValue: keyValuePairs){
-                    System.out.println( new String(keyValue.getFamily()) + " " + new String(keyValue.getQualifier()) + "=" + new String(keyValue.getValue()));
+                    System.out.println( new String(keyValue.getFamily()) + " " +
+                                        new String(keyValue.getQualifier()) + "=" +
+                                        new String(keyValue.getValue()));
                 }
             }
         } finally{

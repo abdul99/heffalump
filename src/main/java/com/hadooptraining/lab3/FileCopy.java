@@ -55,6 +55,8 @@ public class FileCopy {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            System.out.println("You need to provide two arguments when calling FileCopy");
         }
     }
 }
