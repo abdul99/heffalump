@@ -6,7 +6,7 @@ hadoop fs -rm -r input
 hadoop fs -mkdir input
 echo
 echo Copying input files to HDFS...
-hadoop fs -copyFromLocal -f data/company-specialties.txt input
+hadoop fs -copyFromLocal -f data/sample*.txt input
 hadoop fs -ls input
 echo
 echo Running Hadoop task...
