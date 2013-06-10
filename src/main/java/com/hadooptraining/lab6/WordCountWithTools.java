@@ -28,6 +28,8 @@ import org.apache.hadoop.util.ToolRunner;
  */
 public class WordCountWithTools extends Configured implements Tool {
     public int run(String[] args) throws Exception {
+
+        // If the number of arguments is insufficient, print an error message and exit
         if (args.length < 2) {
             System.out.println("Usage: WordCountWithTools <inDir> <outDir>");
             System.out.println("Example: WordCountWithTools input output");
@@ -36,24 +38,42 @@ public class WordCountWithTools extends Configured implements Tool {
             return -1;
         }
 
+        // Your job is handled by the Job object - managed by the JobTracker
         Job job = Job.getInstance(getConf(), "Word count with tools");
 
+        // This is the class that is used to find the jar file that needs to be run
         job.setJarByClass(WordCount.class);
 
+        // Set the mapper class
         job.setMapperClass(WordCount.TokenizerMapper.class);
+
+        // Set the reducer class
         job.setReducerClass(IntSumReducer.class);
 
+        // Set the output key class
         job.setOutputKeyClass(Text.class);
+
+        // Set the output value class
         job.setOutputValueClass(IntWritable.class);
 
+        // Add the input and output paths from program arguments
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
+        // Fire the job and return job status based on success of job
         return job.waitForCompletion(true) ? 0 : 1;
     }
 
+    /**
+     * This is the main program, which just calls the ToolRunner's run method.
+     * @param args arguments to the program
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
+        // Invoke the ToolRunner's run method with required arguments
         int res = ToolRunner.run(new Configuration(), new WordCountWithTools(), args);
+
+        // Return the same exit code that was returned by ToolRunner.run()
         System.exit(res);
     }
 }

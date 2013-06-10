@@ -36,7 +36,10 @@ public class WordCount {
     public static class TokenizerMapper
             extends Mapper<Object, Text, Text, IntWritable>{
 
+        // Create a static variable to store the number 1, since it is used many times
         private final static IntWritable one = new IntWritable(1);
+
+        // Create a variable to store the word in the mapper
         private Text word = new Text();
 
         /**
@@ -50,9 +53,16 @@ public class WordCount {
          */
         public void map(Object key, Text value, Context context)
                 throws IOException, InterruptedException {
+
+            // Create a String tokenizer to break up the string into parts
             StringTokenizer itr = new StringTokenizer(value.toString());
+
+            // Loop through the words found in the line
             while (itr.hasMoreTokens()) {
+                // Set the key as the word itself
                 word.set(itr.nextToken());
+
+                // Set the value as number 1, and push it to the context object
                 context.write(word, one);
             }
         }
@@ -77,11 +87,19 @@ public class WordCount {
          */
         public void reduce(Text key, Iterable<IntWritable> values, Context context
         ) throws IOException, InterruptedException {
+
+            // Create a local variable to store the sum
             int sum = 0;
+
+            // Loop through each value received, and increment sum
             for (IntWritable val : values) {
                 sum += val.get();
             }
+
+            // Set the value of the result based on sum
             result.set(sum);
+
+            // Write the result
             context.write(key, result);
         }
     }
@@ -95,6 +113,8 @@ public class WordCount {
         // This is the configuration object.
         Configuration conf = new Configuration();
         String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
+
+        // If the number of arguments is not correct, print an error message and exit
         if (otherArgs.length != 2) {
             System.out.println("Usage: wordcount <input_hdfs_dir> <output_hdfs_dir>");
             System.out.println("Example: wordcount input output");
@@ -107,20 +127,22 @@ public class WordCount {
         // This is class that is used to find the jar file that needs to be run
         job.setJarByClass(WordCount.class);
 
-        // Set the Map classes
+        // Set the Mapper  class
         job.setMapperClass(TokenizerMapper.class);
         //job.setCombinerClass(IntSumReducer.class);    // Uncomment this to enable the combiner
+
+        // Set the Reducer class
         job.setReducerClass(IntSumReducer.class);
 
-        // Set the reducer classes
+        // Set the reducer key-value classes
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 
-        // Set the input and output path
+        // Set the input and output paths based on program arguments
         FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
         FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
 
-        // Return job status based on success of job
+        // Fire the job and return job status based on success of job
         System.exit(job.waitForCompletion(true) ? 0 : 1);
     }
 }
