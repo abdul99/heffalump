@@ -124,7 +124,7 @@ public class WordCount {
         // Your job is handled by the Job object - managed by the JobTracker
         Job job = Job.getInstance(conf, "word count");
 
-        // This is class that is used to find the jar file that needs to be run
+        // This locates the jar file that needs to be run by using a class name
         job.setJarByClass(WordCount.class);
 
         // Set the Mapper  class

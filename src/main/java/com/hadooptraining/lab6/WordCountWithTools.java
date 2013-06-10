@@ -41,7 +41,7 @@ public class WordCountWithTools extends Configured implements Tool {
         // Your job is handled by the Job object - managed by the JobTracker
         Job job = Job.getInstance(getConf(), "Word count with tools");
 
-        // This is the class that is used to find the jar file that needs to be run
+        // This locates the jar file that needs to be run by using a class name
         job.setJarByClass(WordCount.class);
 
         // Set the mapper class
