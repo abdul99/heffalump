@@ -6,17 +6,39 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/**
+ * The Reducer for the job. It takes <K2,V2> as <Text, IntWritable> and emits <K3,V3> as <Text,IntWritable>.
+ */
 public class LogProcessorReduce extends
         Reducer<Text, IntWritable, Text, IntWritable> {
+
+    // Create a common IntWritable object to hold the result
     private IntWritable result = new IntWritable();
 
+    /**
+     * The reducer looks at the incoming <K,V> pair which happens to the IP address and the number of
+     * bytes associated with it. All the reducer needs to do is sum up all the values (bytes) associates with
+     * the key and write the sum to the context object.
+     * @param key
+     * @param values
+     * @param context
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void reduce(Text key, Iterable<IntWritable> values, Context context)
             throws IOException, InterruptedException {
+        // Create a local variable to store the sum
         int sum = 0;
+
+        // Loop through all the values which are IntWritable objects
         for (IntWritable val : values) {
             sum += val.get();
         }
+
+        // Set the output IntWritable object with the sum
         result.set(sum);
+
+        // Write to the context object
         context.write(key, result);
     }
 }

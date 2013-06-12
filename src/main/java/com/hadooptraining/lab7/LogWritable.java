@@ -74,7 +74,7 @@ public class LogWritable implements Writable {
     }
 
     /**
-     * An important method to enable sorting of values. Used by Iterable template.
+     * A method used to calculate assignment of reducers based on key.
      * @return
      */
     public int hashCode()

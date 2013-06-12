@@ -86,7 +86,7 @@ public class LogProcessorWithCustomWritable extends Configured implements Tool {
      */
     public static class LogProcessorReduce extends
             Reducer<Text, LogWritable, Text, IntWritable> {
-        // Create a common IntWritable object to hold your result
+        // Create a common IntWritable object to hold the result
         private IntWritable result = new IntWritable();
 
         /**
