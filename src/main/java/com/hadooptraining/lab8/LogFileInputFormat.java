@@ -16,7 +16,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
  * override the isSplitable() method of the FileInputFormat to control
  * whether the input files are split-up into logical partitions or used as whole files.
  */
-public class LogFileInputFormat extends FileInputFormat<LongWritable, LogWritable>{
+public class LogFileInputFormat extends FileInputFormat<LongWritable, LogWritable> {
 
     /**
      * Returns an instance of a custom record reader.
