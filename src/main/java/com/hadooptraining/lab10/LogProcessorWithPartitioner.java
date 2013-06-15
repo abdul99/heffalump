@@ -30,7 +30,7 @@ import org.apache.hadoop.util.ToolRunner;
  * on their hashcode(), using the formula key.hashcode() mod r, where r is the number of
  * reduce tasks. There can be scenarios where our computations logic would require or
  * can be better implemented using an application's specific data-partitioning schema.
- * In this recipe, we implement a custom Partitioner for our HTTP log processing application,
+ * In this lab, we implement a custom Partitioner for our HTTP log processing application,
  * which partitions the keys (IP addresses) based on their geographic regions.
  *
  * In this lab we'll introduce a simple partitioner for the same log processing application
