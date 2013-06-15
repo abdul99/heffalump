@@ -53,7 +53,8 @@ public class LogProcessorDistributed extends Configured implements Tool {
         Job job = Job.getInstance(getConf(), "log-analysis");
 
         // Add the GeoID database in job's cache. The datafile must be available on HDFS.
-        job.addCacheFile(new URI("/user/shrek/GeoIP.dat"));
+        // job.addCacheFile(new URI("/user/shrek/GeoIP.dat")); // modern way, but broken in CDH4
+        DistributedCache.addCacheFile(new URI("/user/shrek/GeoIP.dat"), job.getConfiguration());
 
         // This locates the jar file that needs to be run by using a class name
         job.setJarByClass(LogProcessorDistributed.class);
