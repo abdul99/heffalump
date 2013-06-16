@@ -17,6 +17,10 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+/************************************************************************
+ *                                LAB 9                                 *
+ ************************************************************************/
+
 /**
  * After running the map function, if there are many key-value pairs with the same key, Hadoop has
  * to move all those values to the reduce function. This can incur a significant overhead. To

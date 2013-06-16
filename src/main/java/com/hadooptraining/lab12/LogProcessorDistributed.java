@@ -18,6 +18,10 @@ import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+/************************************************************************
+ *                                LAB 12                                *
+ ************************************************************************/
+
 /**
  * We can use the Hadoop DistributedCache to distribute read-only file based resources
  * to the Map and Reduce tasks. These resources can be simple data files, archives or
@@ -52,7 +56,7 @@ public class LogProcessorDistributed extends Configured implements Tool {
         // Your job is handled by the Job object - managed by the JobTracker
         Job job = Job.getInstance(getConf(), "log-analysis");
 
-        // Add the GeoID database in job's cache. The datafile must be available on HDFS.
+        // Add the GeoIP database in job's cache. The data file must be available on HDFS.
         // job.addCacheFile(new URI("/user/shrek/GeoIP.dat")); // modern way, but broken in CDH4
         DistributedCache.addCacheFile(new URI("/user/shrek/GeoIP.dat"), job.getConfiguration());
 

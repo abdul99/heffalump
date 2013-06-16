@@ -14,6 +14,10 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+/************************************************************************
+ *                                LAB 10                                *
+ ************************************************************************/
+
 /**
  * Hadoop partitions the intermediate data generated from the Map tasks across the reduce tasks
  * of the computations. A proper partitioning function ensuring balanced load for each reduce
