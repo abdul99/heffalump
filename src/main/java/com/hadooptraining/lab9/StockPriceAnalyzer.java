@@ -70,20 +70,7 @@ public class StockPriceAnalyzer extends Configured implements Tool {
             String stock_symbol = null;
             String stock_price_high = null;
 
-            // Simple loop to find out the values of interest to us
-            for (int i = 0; i < 5 && tokenizer.hasMoreTokens(); i++) {
-                switch (i) {
-                    case 1: // The second field in data line
-                        stock_symbol = tokenizer.nextToken();
-                        break;
-                    case 4: // The fifth field in the data line
-                        stock_price_high = tokenizer.nextToken();
-                        break;
-                    default:
-                        tokenizer.nextToken();
-                        break;
-                }
-            }
+            // TODO STUDENT
 
             // Exit out of reducer when a bad record is found
             if (stock_symbol == null || stock_price_high == null) {
@@ -93,18 +80,7 @@ public class StockPriceAnalyzer extends Configured implements Tool {
             }
 
             // Discard the schema line at the head of each file
-            if (stock_symbol.equals("stock_symbol")) {
-                // Do nothing
-            } else {
-                // Set the key to be the stock symbol
-                stock.set(stock_symbol);
-
-                // Set the value to be the high price of the stock
-                FloatWritable high = new FloatWritable(Float.valueOf(stock_price_high));
-
-                // Write the key-value to the context object
-                context.write(stock, high);
-            }
+            // TODO STUDENT
         }
     }
 
@@ -129,17 +105,8 @@ public class StockPriceAnalyzer extends Configured implements Tool {
             // assume prices are never negative
             float max = 0.0f;
 
-            // Loop through the values
-            for (FloatWritable price : values) {
-                float current = price.get();
+            // TODO STUDENT
 
-                // Set the max value if current value found to be greater than current max
-                if (current > max)
-                    max = current;
-            }
-
-            // Write the key-value to the context object
-            context.write(key, new FloatWritable(max));
         }
     }
 
@@ -171,7 +138,7 @@ public class StockPriceAnalyzer extends Configured implements Tool {
         job.setReducerClass(StockReducer.class);
 
         // Set a combiner for the task
-        job.setCombinerClass(StockReducer.class);
+        // TODO STUDENT
 
         // Set reducer output key and value classes
         job.setOutputKeyClass(Text.class);

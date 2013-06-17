@@ -30,6 +30,7 @@ public class LogFileInputFormat extends FileInputFormat<LongWritable, LogWritabl
     public RecordReader<LongWritable, LogWritable> createRecordReader(
             InputSplit arg0, TaskAttemptContext arg1) throws IOException,
             InterruptedException {
-        return new LogFileRecordReader();
+        return null; // TODO STUDENT REMOVE THIS LINE
+        // TODO STUDENT
     }
 }

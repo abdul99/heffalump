@@ -27,18 +27,8 @@ public class LogProcessorReduce extends
      */
     public void reduce(Text key, Iterable<IntWritable> values, Context context)
             throws IOException, InterruptedException {
-        // Create a local variable to store the sum
-        int sum = 0;
 
-        // Loop through all the values which are IntWritable objects
-        for (IntWritable val : values) {
-            sum += val.get();
-        }
+        // TODO STUDENT
 
-        // Set the output IntWritable object with the sum
-        result.set(sum);
-
-        // Write to the context object
-        context.write(key, result);
     }
 }

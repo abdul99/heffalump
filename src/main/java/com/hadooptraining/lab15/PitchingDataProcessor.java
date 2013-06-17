@@ -41,24 +41,7 @@ public class PitchingDataProcessor extends Configured implements Tool {
             // Format: playerID,yearID,stint,teamID,lgID,W,L,G,GS,CG,SHO,SV,IPouts,H,ER,HR,BB,SO,BAOpp,ERA,IBB,WP,HBP,BK,BFP,GF,R,SH,SF,GIDP
             // Example: aardsda01,2010,1,SEA,AL,0,6,53,0,0,0,31,149,33,19,5,25,49,,3.44,5,2,2,0,202,43,19,,,
 
-            String[] fields = value.toString().split(",");
-
-            // This simple check eliminates the very first record
-            if ("playerID".equalsIgnoreCase(fields[0])) {
-                return;
-            }
-
-            // The 27th field, i.e. field(26) contains the runs allowed by the player
-            if ((fields[26] == null) || (fields[26].isEmpty()))
-                return;
-
-            // Set the player ID as the key. This will produce pitching records sorted by player IDs
-            playerIDText.set(fields[0]);
-
-            // Set the value object with values extracted from each record
-            pitchingValue.set(fields[0], fields[1], Integer.parseInt(fields[26]));
-
-            context.write(playerIDText, pitchingValue);
+            // TODO STUDENT
         }
     }
 
@@ -72,14 +55,7 @@ public class PitchingDataProcessor extends Configured implements Tool {
         public void reduce(Text key, Iterable<PitchingWritable> values, Context context)
                 throws IOException, InterruptedException {
 
-            int sum = 0;
-
-            // For all keys received, add up all the runs found in the value object
-            for (PitchingWritable line : values) {
-                sum += line.getRunsAllowed().get();
-            }
-            result.set(sum);
-            context.write(key, result);
+            // TODO STUDENT
         }
     }
 

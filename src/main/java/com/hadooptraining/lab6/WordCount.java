@@ -54,17 +54,7 @@ public class WordCount {
         public void map(Object key, Text value, Context context)
                 throws IOException, InterruptedException {
 
-            // Create a String tokenizer to break up the string into parts
-            StringTokenizer itr = new StringTokenizer(value.toString());
-
-            // Loop through the words found in the line
-            while (itr.hasMoreTokens()) {
-                // Set the key as the word itself
-                word.set(itr.nextToken());
-
-                // Set the value as number 1, and push it to the context object
-                context.write(word, one);
-            }
+            // TODO STUDENT
         }
     }
 
@@ -88,19 +78,7 @@ public class WordCount {
         public void reduce(Text key, Iterable<IntWritable> values, Context context
         ) throws IOException, InterruptedException {
 
-            // Create a local variable to store the sum
-            int sum = 0;
-
-            // Loop through each value received, and increment sum
-            for (IntWritable val : values) {
-                sum += val.get();
-            }
-
-            // Set the value of the result based on sum
-            result.set(sum);
-
-            // Write the result
-            context.write(key, result);
+            // TODO STUDENT
         }
     }
 
@@ -121,28 +99,6 @@ public class WordCount {
             System.exit(2);
         }
 
-        // Your job is handled by the Job object - managed by the JobTracker
-        Job job = Job.getInstance(conf, "word count");
-
-        // This locates the jar file that needs to be run by using a class name
-        job.setJarByClass(WordCount.class);
-
-        // Set the Mapper  class
-        job.setMapperClass(TokenizerMapper.class);
-        //job.setCombinerClass(IntSumReducer.class);    // Uncomment this to enable the combiner
-
-        // Set the Reducer class
-        job.setReducerClass(IntSumReducer.class);
-
-        // Set the reducer key-value classes
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(IntWritable.class);
-
-        // Set the input and output paths based on program arguments
-        FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
-        FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
-
-        // Fire the job and return job status based on success of job
-        System.exit(job.waitForCompletion(true) ? 0 : 1);
+        // TODO STUDENT
     }
 }

@@ -76,7 +76,7 @@ public class LogProcessorWithPartitioner extends Configured implements Tool {
         job.setInputFormatClass(LogFileInputFormat.class);
 
         // Configure the partitioner
-        job.setPartitionerClass(IPBasedPartitioner.class);
+        // TODO STUDENT
 
         // Add the input and output paths from program arguments
         FileInputFormat.setInputPaths(job, new Path(args[0]));

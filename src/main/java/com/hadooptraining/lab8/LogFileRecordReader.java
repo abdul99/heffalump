@@ -32,7 +32,7 @@ public class LogFileRecordReader extends RecordReader<LongWritable, LogWritable>
     public void initialize(InputSplit inputSplit, TaskAttemptContext attempt)
             throws IOException, InterruptedException {
         lineReader = new LineRecordReader();
-        lineReader.initialize(inputSplit, attempt);
+        // TODO STUDENT
 
     }
 
@@ -59,24 +59,8 @@ public class LogFileRecordReader extends RecordReader<LongWritable, LogWritable>
         Pattern p = Pattern.compile(logEntryPattern);
         Matcher matcher = p.matcher(lineReader.getCurrentValue().toString());
 
-        // If no match found, flag an error
-        if (!matcher.matches()) {
-            System.out.println("Bad Record:"+ lineReader.getCurrentValue());
-            return nextKeyValue();
-        }
+        // TODO STUDENT
 
-        // Assign local variables to the values parsed out of the log line
-        String userIP = matcher.group(1);
-        String timestamp = matcher.group(4);
-        String request = matcher.group(5);
-        int status = Integer.parseInt(matcher.group(6));
-        int bytes = Integer.parseInt(matcher.group(7));
-
-        // Create a new output value object
-        value = new LogWritable();
-
-        // And assign its values
-        value.set(userIP, timestamp, request, bytes, status);
         return true;
     }
 

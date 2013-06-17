@@ -23,12 +23,9 @@ public class IPBasedPartitioner extends Partitioner<Text, IntWritable> {
     @Override
     public int getPartition(Text ipAddress, IntWritable value, int numPartitions) {
         // Tokenize the IP address by breaking it into its 4 components
-        StringTokenizer tokenizer  = new StringTokenizer(ipAddress.toString(), ".");
-        if (tokenizer.hasMoreTokens()){
-            String token = tokenizer.nextToken();
-            // return a partition Id based on first component of IP address
-            return ((token.hashCode() & Integer.MAX_VALUE) % numPartitions);
-        }
+
+        // TODO STUDENT
+        
         return 0;
     }
 }

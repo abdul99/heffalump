@@ -17,29 +17,21 @@ public class BattingWritable implements Writable {
     private IntWritable runs;
 
     public BattingWritable() {
-        this.playerID = new Text();
-        this.year =  new Text();
-        this.runs = new IntWritable();
+        // TODO STUDENT
     }
 
     public void set (String playerID, String year, int runsAllowed) {
-        this.playerID.set(playerID);
-        this.year.set(year);
-        this.runs.set(runsAllowed);
+        // TODO STUDENT
     }
 
     @Override
     public void readFields(DataInput in) throws IOException {
-        playerID.readFields(in);
-        year.readFields(in);
-        runs.readFields(in);
+        // TODO STUDENT
     }
 
     @Override
     public void write(DataOutput out) throws IOException {
-        playerID.write(out);
-        year.write(out);
-        runs.write(out);
+        // TODO STUDENT
     }
 
     public int hashCode() {

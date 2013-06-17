@@ -17,33 +17,26 @@ public class PitchingWritable implements Writable {
     private IntWritable runsAllowed;
 
     public PitchingWritable() {
-        this.playerID = new Text();
-        this.year =  new Text();
-        this.runsAllowed = new IntWritable();
+        // TODO STUDENT
     }
 
     public void set (String playerID, String year, int runsAllowed) {
-        this.playerID.set(playerID);
-        this.year.set(year);
-        this.runsAllowed.set(runsAllowed);
+        // TODO STUDENT
     }
 
     @Override
     public void readFields(DataInput in) throws IOException {
-        playerID.readFields(in);
-        year.readFields(in);
-        runsAllowed.readFields(in);
+        // TODO STUDENT
     }
 
     @Override
     public void write(DataOutput out) throws IOException {
-        playerID.write(out);
-        year.write(out);
-        runsAllowed.write(out);
+        // TODO STUDENT
     }
 
     public int hashCode() {
-        return playerID.hashCode();
+        // TODO STUDENT
+        return 0; // TODO STUDENT REMOVE THIS LINE
     }
 
     public Text getPlayerID() {
@@ -51,11 +44,13 @@ public class PitchingWritable implements Writable {
     }
 
     public Text getYear() {
-        return year;
+        // TODO STUDENT
+        return new Text(); // TODO STUDENT REMOVE THIS LINE
     }
 
     public IntWritable getRunsAllowed() {
-        return runsAllowed;
+        // TODO STUDENT
+        return new IntWritable(); // TODO STUDENT REMOVE THIS LINE
     }
 
 }

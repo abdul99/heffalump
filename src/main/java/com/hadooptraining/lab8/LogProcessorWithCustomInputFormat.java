@@ -66,8 +66,7 @@ public class LogProcessorWithCustomInputFormat extends Configured implements Too
         // Set the reducer output value class
         job.setOutputValueClass(IntWritable.class);
 
-        // Set the input format class
-        job.setInputFormatClass(LogFileInputFormat.class);
+        // TODO STUDENT
 
         // Add the input and output paths from program arguments
         FileInputFormat.setInputPaths(job, new Path(args[0]));
@@ -86,8 +85,8 @@ public class LogProcessorWithCustomInputFormat extends Configured implements Too
         Counters counters = job.getCounters();
 
         // Retrieve the bad records and print it
-        Counter badRecords = counters.findCounter(LogProcessorMap.LOG_PROCESSOR_COUNTER.BAD_RECORDS);
-        System.out.println("Number of Bad Records: " + badRecords.getValue());
+
+        // TODO STUDENT
 
         // Return the status depending on the success of the job
         return jobResult ? 0 : 1;

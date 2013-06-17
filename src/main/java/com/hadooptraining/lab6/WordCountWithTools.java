@@ -41,24 +41,7 @@ public class WordCountWithTools extends Configured implements Tool {
         // Your job is handled by the Job object - managed by the JobTracker
         Job job = Job.getInstance(getConf(), "Word count with tools");
 
-        // This locates the jar file that needs to be run by using a class name
-        job.setJarByClass(WordCount.class);
-
-        // Set the mapper class
-        job.setMapperClass(WordCount.TokenizerMapper.class);
-
-        // Set the reducer class
-        job.setReducerClass(IntSumReducer.class);
-
-        // Set the output key class
-        job.setOutputKeyClass(Text.class);
-
-        // Set the output value class
-        job.setOutputValueClass(IntWritable.class);
-
-        // Add the input and output paths from program arguments
-        FileInputFormat.addInputPath(job, new Path(args[0]));
-        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        // TODO STUDENT
 
         // Fire the job and return job status based on success of job
         return job.waitForCompletion(true) ? 0 : 1;

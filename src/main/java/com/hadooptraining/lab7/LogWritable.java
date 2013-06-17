@@ -38,11 +38,7 @@ public class LogWritable implements Writable {
      * @param status
      */
     public void set (String userIP, String timestamp, String request, int bytes, int status) {
-        this.userIP.set(userIP);
-        this.timestamp.set(timestamp);
-        this.request.set(request);
-        this.responseSize.set(bytes);
-        this.status.set(status);
+        // TODO STUDENT
     }
 
     /**
@@ -52,11 +48,7 @@ public class LogWritable implements Writable {
      */
     @Override
     public void readFields(DataInput in) throws IOException {
-        userIP.readFields(in);
-        timestamp.readFields(in);
-        request.readFields(in);
-        responseSize.readFields(in);
-        status.readFields(in);
+        // TODO STUDENT
     }
 
     /**
@@ -66,11 +58,7 @@ public class LogWritable implements Writable {
      */
     @Override
     public void write(DataOutput out) throws IOException {
-        userIP.write(out);
-        timestamp.write(out);
-        request.write(out);
-        responseSize.write(out);
-        status.write(out);
+        // TODO STUDENT
     }
 
     /**
@@ -79,6 +67,7 @@ public class LogWritable implements Writable {
      */
     public int hashCode()
     {
+        // TODO STUDENT
         return userIP.hashCode();
     }
 

@@ -25,18 +25,8 @@ public class FileCopy {
         // following two lines show how to include a specific configuration file
         //config.addResource(new Path("/etc/hadoop/conf.pseudo.mr1/core-site.xml"));
         //config.addResource(new Path("/etc/hadoop/conf.pseudo.mr1/hdfs-site.xml"));
-        FileSystem hdfs = FileSystem.get(config);
-        LocalFileSystem local = FileSystem.getLocal(config);
-        FSDataInputStream inStream = local.open(inPath);
-        FSDataOutputStream outStream = hdfs.create(outPath);
 
-        byte[] fromFile = new byte[1000];
-        int datalength;
-        while ((datalength = inStream.read(fromFile)) > 0) {
-            outStream.write(fromFile, 0, datalength);
-        }
-        inStream.close();
-        outStream.close();
+        // TODO STUDENT
     }
 
     /**
@@ -49,12 +39,9 @@ public class FileCopy {
         if (args.length == 2) {
             String inputPath = args[0];
             String outputPath = args[1];
-            try {
-                FileCopy copier = new FileCopy();
-                copier.copyFile(new Path(inputPath), new Path(outputPath));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            // TODO STUDENT
+
         } else {
             System.out.println("You need to provide two arguments when calling FileCopy");
         }

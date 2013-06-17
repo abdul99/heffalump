@@ -60,24 +60,8 @@ public class LogProcessorWithCustomWritable extends Configured implements Tool {
             String logEntryPattern = "^(\\S+) (\\S+) (\\S+) \\[([\\w:/]+\\s[+\\-]\\d{4})\\] \"(.+?)\" (\\d{3}) (\\d+)";
             // Example: unicomp6.unicomp.net - - [01/Jul/1995:00:00:14 -0400] "GET /shuttle/countdown/count.gif HTTP/1.0" 200 40310
 
-            // Compile the pattern and keep it in a local variable
-            Pattern p = Pattern.compile(logEntryPattern);
-            Matcher matcher = p.matcher(value.toString());
+            // TODO STUDENT
 
-            // if line in log file did not match, get out of the mapper method
-            if (!matcher.matches()) {
-                return;
-            }
-
-            // Set the KEY of the mapper by using one of the extracted values from log line
-            userHostText.set(matcher.group(1));
-
-            // Set the VALUE of the mapper by using other extracted values from log line
-            logValue.set(matcher.group(1), matcher.group(4), matcher.group(5), Integer.parseInt(matcher.group(7)),
-                    Integer.parseInt(matcher.group(6)));
-
-            // Write the key and value to the context object
-            context.write(userHostText, logValue);
         }
     }
 
@@ -102,20 +86,7 @@ public class LogProcessorWithCustomWritable extends Configured implements Tool {
         public void reduce(Text key, Iterable<LogWritable> values,  Context context)
                 throws IOException, InterruptedException {
 
-            // Create a local variable to store the sum
-            int sum = 0;
-
-            // Iterate through each value received
-            for (LogWritable logLine : values) {
-                // extract the response size and add it up
-                sum += logLine.getResponseSize().get();
-            }
-
-            // Set the value of the output as calculated sum
-            result.set(sum);
-
-            // Write to the context object
-            context.write(key, result);
+            // TODO STUDENT
         }
     }
 
@@ -141,23 +112,7 @@ public class LogProcessorWithCustomWritable extends Configured implements Tool {
         // This locates the jar file that needs to be run by using a class name
         job.setJarByClass(LogProcessorWithCustomWritable.class);
 
-        // Set the mapper class
-        job.setMapperClass(LogProcessorMap.class);
-
-        // Set the reducer class
-        job.setReducerClass(LogProcessorReduce.class);
-
-        // Set the reducer output key class
-        job.setOutputKeyClass(Text.class);
-
-        // Set the reducer output value class
-        job.setOutputValueClass(IntWritable.class);
-
-        // Set the mapper output key class
-        job.setMapOutputKeyClass(Text.class);
-
-        // Set the mapper output value class
-        job.setMapOutputValueClass(LogWritable.class);
+        // TODO STUDENT
 
         // Add the input and output paths from program arguments
         FileInputFormat.setInputPaths(job, new Path(args[0]));

@@ -51,17 +51,7 @@ public class BattingDataProcessor extends Configured implements Tool {
                 return;
             }
 
-            // Item 9 in the record stores the runs made by the player
-            if ((matcher.group(9) == null ) || matcher.group(9).isEmpty())
-                return;
-
-            // Set the year as the key. This is field number 2.
-            year.set(matcher.group(2));
-
-            // Create a value object formed out of values extracted from the record
-            battingValue.set(matcher.group(1), matcher.group(2), Integer.parseInt(matcher.group(9)));
-
-            context.write(year, battingValue);
+            // TODO STUDENT
         }
     }
 
@@ -75,14 +65,7 @@ public class BattingDataProcessor extends Configured implements Tool {
         public void reduce(Text key, Iterable<BattingWritable> values, Context context)
                 throws IOException, InterruptedException {
 
-            int sum = 0;
-
-            // Loop through each record to add up all the values received for each key
-            for (BattingWritable line : values) {
-                sum += line.getRuns().get();
-            }
-            result.set(sum);
-            context.write(key, result);
+            // TODO STUDENT
         }
     }
 

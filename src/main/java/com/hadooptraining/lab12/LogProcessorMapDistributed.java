@@ -38,14 +38,7 @@ public class LogProcessorMapDistributed
     public void setup(Context context) throws IOException{
         Configuration conf = context.getConfiguration();
 
-        // Get the local cache file path from the distributed cache
-        localCachePath = DistributedCache.getLocalCacheFiles(conf);
-
-        // Create a lookup object to use when resolving IP addresses
-        File lookupDbDir = new File(localCachePath[0].toString());
-
-        // Create a lookup object
-        lookupService = new LookupService(lookupDbDir, LookupService.GEOIP_MEMORY_CACHE);
+        // TODO STUDENT
     }
 
     /**
@@ -55,7 +48,8 @@ public class LogProcessorMapDistributed
      */
     public void cleanup(Context context) throws IOException{
         // Close the database connection for the lookup service
-        lookupService.close();
+
+        // TODO STUDENT
     }
 
     /**
@@ -71,10 +65,7 @@ public class LogProcessorMapDistributed
     public void map(Object key, LogWritable value, Context context)
             throws IOException, InterruptedException {
 
-        // Lookup the country from the user's IP address
-        Country country = lookupService.getCountry(value.getUserIP().toString());
+        // TODO STUDENT
 
-        // Write the key-value pair to the context object
-        context.write(new Text(country.getName()), value.getResponseSize());
     }
 }

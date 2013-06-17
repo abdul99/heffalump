@@ -76,7 +76,7 @@ public class LogProcessorWithDebug extends Configured implements Tool {
             logValue.set(matcher.group(1), matcher.group(4), matcher.group(5), Integer.parseInt(matcher.group(7)),  Integer.parseInt(matcher.group(6)));
 
             // Print out some values to the console for debugging purposes
-            System.out.println("Host: " + userHostText.toString() + "\t\tbytes read: " + logValue.getResponseSize());
+            // TODO STUDENT
 
             // Write the key and value to the context object
             context.write(userHostText, logValue);
@@ -117,7 +117,7 @@ public class LogProcessorWithDebug extends Configured implements Tool {
             result.set(sum);
 
             // Send some diagnostic messages to the log4j logger
-            logger.info("[" + key.toString() + "] -> " + result.toString());
+            // TODO STUDENT
 
             // Write to the context object
             context.write(key, result);

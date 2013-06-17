@@ -82,10 +82,8 @@ public class LogWritable implements WritableComparable<LogWritable> {
      */
     @Override
     public int compareTo(LogWritable o) {
-        if (userIP.compareTo(o.userIP) == 0) {
-            return timestamp.compareTo(o.timestamp);
-        } else
-            return userIP.compareTo(o.userIP);
+        // TODO STUDENT
+        return 0; // TODO STUDENT REMOVE THIS LINE
     }
 
     /**

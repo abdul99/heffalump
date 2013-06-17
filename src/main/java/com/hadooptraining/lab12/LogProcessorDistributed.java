@@ -58,7 +58,8 @@ public class LogProcessorDistributed extends Configured implements Tool {
 
         // Add the GeoIP database in job's cache. The data file must be available on HDFS.
         // job.addCacheFile(new URI("/user/shrek/GeoIP.dat")); // modern way, but broken in CDH4
-        DistributedCache.addCacheFile(new URI("/user/shrek/GeoIP.dat"), job.getConfiguration());
+
+        // TODO STUDENT
 
         // This locates the jar file that needs to be run by using a class name
         job.setJarByClass(LogProcessorDistributed.class);
