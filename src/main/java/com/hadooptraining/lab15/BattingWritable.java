@@ -8,6 +8,9 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
+/**
+ * A custom writable object to store batting record for a player in a given year.
+ */
 public class BattingWritable implements Writable {
 
     private Text playerID, year;

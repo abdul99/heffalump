@@ -16,6 +16,14 @@ import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
 
+/************************************************************************
+ *                                LAB 15                                *
+ ************************************************************************/
+/**
+ * This class adds up all the runs allowed by the player in their lifetime. We use the
+ * playerID as the key for the MapReduce job. The value is a custom writable object called
+ * PitchingWritable.
+ */
 public class PitchingDataProcessor extends Configured implements Tool {
 
     public static class PitchingDataProcessorMap extends
@@ -24,6 +32,9 @@ public class PitchingDataProcessor extends Configured implements Tool {
         private Text playerIDText = new Text();
         private PitchingWritable pitchingValue = new PitchingWritable();
 
+        /**
+         * Mapper class using 'playerID' as key and 'PitchingWritable' as VALUE.
+         */
         public void map(LongWritable key, Text value, Context context)
                 throws IOException, InterruptedException {
 
@@ -32,21 +43,28 @@ public class PitchingDataProcessor extends Configured implements Tool {
 
             String[] fields = value.toString().split(",");
 
+            // This simple check eliminates the very first record
             if ("playerID".equalsIgnoreCase(fields[0])) {
-                // This simple check eliminates the very first record
                 return;
             }
 
+            // The 27th field, i.e. field(26) contains the runs allowed by the player
             if ((fields[26] == null) || (fields[26].isEmpty()))
                 return;
 
-            pitchingValue.set(fields[0], fields[1], Integer.parseInt(fields[26]));
+            // Set the player ID as the key. This will produce pitching records sorted by player IDs
             playerIDText.set(fields[0]);
+
+            // Set the value object with values extracted from each record
+            pitchingValue.set(fields[0], fields[1], Integer.parseInt(fields[26]));
 
             context.write(playerIDText, pitchingValue);
         }
     }
 
+    /**
+     * Reducer class to add up all numbers associated with key.
+     */
     public static class PitchingDataProcessorReduce extends
             Reducer<Text, PitchingWritable, Text, IntWritable> {
         private IntWritable result = new IntWritable();
@@ -55,6 +73,8 @@ public class PitchingDataProcessor extends Configured implements Tool {
                 throws IOException, InterruptedException {
 
             int sum = 0;
+
+            // For all keys received, add up all the runs found in the value object
             for (PitchingWritable line : values) {
                 sum += line.getRunsAllowed().get();
             }
@@ -63,16 +83,18 @@ public class PitchingDataProcessor extends Configured implements Tool {
         }
     }
 
+    /**
+     * Constructs job and executes it.
+     * @param args
+     * @return
+     * @throws Exception
+     */
     @Override
     public int run(String[] args) throws Exception {
         if (args.length < 2) {
             System.err.println("Usage: <input_path> <output_path>");
             System.exit(-1);
         }
-
-		/* input parameters */
-        String inputPath = args[0];
-        String outputPath = args[1];
 
         Job job = Job.getInstance(getConf(), "pitching-analysis");
 
@@ -87,12 +109,17 @@ public class PitchingDataProcessor extends Configured implements Tool {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 
-        FileInputFormat.setInputPaths(job, new Path(inputPath));
-        FileOutputFormat.setOutputPath(job, new Path(outputPath));
+        FileInputFormat.setInputPaths(job, new Path(args[0]));
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
         return job.waitForCompletion(true) ? 0 : 1;
     }
 
+    /**
+     * Entry point for program.
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         int res = ToolRunner.run(new Configuration(), new PitchingDataProcessor(), args);
         System.exit(res);

@@ -8,6 +8,9 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
+/**
+ * A custom writable object to store pitching record for a player.
+ */
 public class PitchingWritable implements Writable {
 
     private Text playerID, year;

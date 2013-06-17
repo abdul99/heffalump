@@ -18,12 +18,23 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/************************************************************************
+ *                                LAB 15                                *
+ ************************************************************************/
+/**
+ * This class calculates the runs made in any given year since baseball records are available.
+ * We use the year as the key for the MapReduce job. The value is a custom writable object called
+ * BattingWritable.
+ */
 public class BattingDataProcessor extends Configured implements Tool {
 
+    /**
+     * Mapper class using 'year' as key and 'BattingWritable' as VALUE.
+     */
     public static class BattingDataProcessorMap extends
             Mapper<LongWritable, Text, Text, BattingWritable> {
 
-        private Text playerIDText = new Text();
+        private Text year = new Text();
         private BattingWritable battingValue = new BattingWritable();
 
         public void map(LongWritable key, Text value, Context context)
@@ -40,16 +51,23 @@ public class BattingDataProcessor extends Configured implements Tool {
                 return;
             }
 
+            // Item 9 in the record stores the runs made by the player
             if ((matcher.group(9) == null ) || matcher.group(9).isEmpty())
                 return;
 
-            battingValue.set(matcher.group(1), matcher.group(2), Integer.parseInt(matcher.group(9)));
-            playerIDText.set(matcher.group(1));
+            // Set the year as the key. This is field number 2.
+            year.set(matcher.group(2));
 
-            context.write(playerIDText, battingValue);
+            // Create a value object formed out of values extracted from the record
+            battingValue.set(matcher.group(1), matcher.group(2), Integer.parseInt(matcher.group(9)));
+
+            context.write(year, battingValue);
         }
     }
 
+    /**
+     * Reducer class to add up all numbers associated with key.
+     */
     public static class BattingDataProcessorReduce extends
             Reducer<Text, BattingWritable, Text, IntWritable> {
         private IntWritable result = new IntWritable();
@@ -58,6 +76,8 @@ public class BattingDataProcessor extends Configured implements Tool {
                 throws IOException, InterruptedException {
 
             int sum = 0;
+
+            // Loop through each record to add up all the values received for each key
             for (BattingWritable line : values) {
                 sum += line.getRuns().get();
             }
@@ -66,16 +86,18 @@ public class BattingDataProcessor extends Configured implements Tool {
         }
     }
 
+    /**
+     * Constructs job and executes it.
+     * @param args
+     * @return
+     * @throws Exception
+     */
     @Override
     public int run(String[] args) throws Exception {
         if (args.length < 2) {
             System.err.println("Usage: <input_path> <output_path>");
             System.exit(-1);
         }
-
-		/* input parameters */
-        String inputPath = args[0];
-        String outputPath = args[1];
 
         Job job = Job.getInstance(getConf(), "batting-analysis");
 
@@ -90,12 +112,17 @@ public class BattingDataProcessor extends Configured implements Tool {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 
-        FileInputFormat.setInputPaths(job, new Path(inputPath));
-        FileOutputFormat.setOutputPath(job, new Path(outputPath));
+        FileInputFormat.setInputPaths(job, new Path(args[0]));
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
         return job.waitForCompletion(true) ? 0 : 1;
     }
 
+    /**
+     * Entry point for program.
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         int res = ToolRunner.run(new Configuration(), new BattingDataProcessor(), args);
         System.exit(res);
